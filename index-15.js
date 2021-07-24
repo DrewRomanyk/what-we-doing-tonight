@@ -11,7 +11,7 @@ function shuffle(array) {
     return array;
 }
 
-var index = 3;
+var index = 4;
 var randomSeed = '1062155580';
 Math.seedrandom(randomSeed);
 
