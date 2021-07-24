@@ -25,7 +25,7 @@ jobs:
         if [ $index == 4 ]
         then
           index=0
-          randomSeed=$GITHUB_RUN_ID
+          randomSeed=$GITHUB_SHA
         else
           index=`expr $index + 1`
         fi
