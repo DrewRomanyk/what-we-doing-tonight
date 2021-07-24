@@ -12,7 +12,7 @@ function shuffle(array) {
 }
 
 var index = 4;
-var randomSeed = 'first';
+var randomSeed = '1';
 Math.seedrandom(randomSeed);
 
 var choosenerOptions = shuffle([
