@@ -16,10 +16,12 @@ jobs:
     - name: Update files
       run: |
         echo "OLD_FILE=$(ls index-*)" >> $GITHUB_ENV
+
         index=$(grep -F 'var index =' $(ls index-*) | grep -o '[0-9]*')
         randomSeed=$(grep -F 'var randomSeed =' $(ls index-*) | grep -o '[0-9]*')
         oldIndex=$index
         oldRandomSeed=$randomSeed
+
         if [ $index == 4 ]
         then
           index=0
@@ -27,10 +29,12 @@ jobs:
         else
           index=`expr $index + 1`
         fi
+
         sed -i -e "s/var index = $oldIndex/var index = $index/g" $(ls index-*)
         sed -i -e "s/var randomSeed = '$oldRandomSeed'/var randomSeed = '$randomSeed'/g" $(ls index-*)
-        sed -i -e "s/src='$(ls index-*)'/src='index-$GITHUB_RUN_ID.js'/g" index.html
-        mv $(ls index-*) index-$GITHUB_RUN_ID.js
+
+        sed -i -e "s/src='$(ls index-*)'/src='index-$GITHUB_RUN_NUMBER.js'/g" index.html
+        mv $(ls index-*) index-$GITHUB_RUN_NUMBER.js
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
