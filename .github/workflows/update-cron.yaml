@@ -1,0 +1,41 @@
+name: Update repo cron
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * FRI'  # At 12:00 PM UTC, only on Friday
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Update files
+      run: |
+        echo "OLD_FILE=$(ls index-*)" >> $GITHUB_ENV
+        index=$(grep -F 'var index =' ./index-2021-07-24.js | grep -o '[0-9]*')
+        randomSeed=$(grep -F 'var randomSeed =' ./index-2021-07-24.js | grep -o '[0-9]*')
+        oldIndex=$index
+        oldRandomSeed=$randomSeed
+        if [$index -eq 4];
+        then
+          index=0
+          randomSeed=$(GITHUB_RUN_NUMBER)
+        else
+          index=`expr $index + 1`
+        fi
+        sed -i -e "s/var index = $oldIndex/var index = $index/g" $(ls index-*)
+        sed -i -e "s/var randomSeed = '$oldRandomSeed'/var randomSeed = '$randomSeed'/g" $(ls index-*)
+        mv $(ls index-*) index-$(GITHUB_RUN_NUMBER).js
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: github-actions
+        author_email: github-actions[bot]@users.noreply.github.com
+        message: "Update cron variables"
+        add: '.'
+        remove: '${{ env.OLD_FILE }}'
