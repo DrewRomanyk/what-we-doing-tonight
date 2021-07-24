@@ -11,7 +11,7 @@ function shuffle(array) {
     return array;
 }
 
-var index = 0;
+var index = 1;
 var randomSeed = 'first';
 Math.seedrandom(randomSeed);
 
