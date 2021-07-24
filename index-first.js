@@ -12,7 +12,7 @@ function shuffle(array) {
 }
 
 var index = 4;
-var randomSeed = "20210730";
+var randomSeed = 'first';
 Math.seedrandom(randomSeed);
 
 var choosenerOptions = shuffle([
