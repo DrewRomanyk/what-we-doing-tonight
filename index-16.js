@@ -11,8 +11,8 @@ function shuffle(array) {
     return array;
 }
 
-var index = 4;
-var randomSeed = '1062155580';
+var index = 0;
+var randomSeed = '1062164663';
 Math.seedrandom(randomSeed);
 
 var choosenerOptions = shuffle([
