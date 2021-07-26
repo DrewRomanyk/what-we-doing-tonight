@@ -39,7 +39,7 @@ with open('data.json', 'r+') as json_file:
         <title>What we doing tonight!?</title>
     </head>
     <body>
-        <h1>""" + data['choosenerList'][data['index']] + """</h1>
-        <h1>""" + data['foodList'][data['index']] + """</h1>
+        <h1>Choosener: """ + data['choosenerList'][data['index']] + """</h1>
+        <h1>Food: """ + data['foodList'][data['index']] + """</h1>
     </body>
 </html>""")
